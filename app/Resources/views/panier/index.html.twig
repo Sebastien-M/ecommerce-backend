@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Paniers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Articles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for panier in paniers %}
+            <tr>
+                <td><a href="{{ path('panier_show', { 'id': panier.id }) }}">{{ panier.id }}</a></td>
+                <td>{% if panier.articles %}{{ panier.articles|join(', ') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('panier_show', { 'id': panier.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('panier_edit', { 'id': panier.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('panier_new') }}">Create a new panier</a>
+        </li>
+    </ul>
+{% endblock %}
