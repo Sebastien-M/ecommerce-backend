@@ -45,7 +45,6 @@ class UtilisateurController extends Controller {
         $form = $this->createForm('AppBundle\Form\UtilisateurType', $utilisateur);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
@@ -62,7 +61,7 @@ class UtilisateurController extends Controller {
     }
 
     /**
-     * Creates a new utilisateur entity.
+     * Creates a new utilisateur entity accessible from api.
      *
      * @Route("/new/user", name="utilisateur_new")
      * @Method({"POST"})
@@ -109,6 +108,33 @@ class UtilisateurController extends Controller {
             return new JsonResponse("Deleted", 200, array('Access-Control-Allow-Origin' => '*'));
         }
         return new JsonResponse("No user found with the id " . $id, 400, array('Access-Control-Allow-Origin' => '*'));
+    }
+
+    /**
+     * Return true if username and password matches.
+     *
+     * @Route("/connect", name="utilisateur_connect")
+     * @Method("POST")
+     */
+    public function connectAction(Request $request) {
+        $username = $request->get("username");
+        $password = $request->get("password");
+        $user = $this->getDoctrine()
+                ->getRepository('AppBundle:Utilisateur')
+                ->findOneBy(array('username' => $username));
+        
+        $encoder_service = $this->get('security.encoder_factory');
+        $encoder = $encoder_service->getEncoder($user);
+        $encoded_pass = $encoder->encodePassword($password, $user->getSalt());
+
+        //then compare    $user->getPassword() and $encoded_pass
+
+
+        if ($encoded_pass == $user->getPassword()) {
+
+            return new JsonResponse("Connected", 200, array('Access-Control-Allow-Origin' => '*'));
+        }
+        return new JsonResponse("Incorrect username or password entered :". $encoded_pass. "!=". $user->getPassword(), 400, array('Access-Control-Allow-Origin' => '*'));
     }
 
     /**

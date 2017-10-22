@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,6 +64,16 @@ class Produit
      * @ORM\Column(name="disponible", type="boolean")
      */
     private $disponible;
+    
+    
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the product brochure as an Image file.")
+     * @Assert\File(mimeTypes={ "application/image" })
+     */
+    private $image;
+    
 
     /**
      * @var float
@@ -248,5 +259,29 @@ class Produit
     public function getTitre()
     {
         return $this->titre;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Produit
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
