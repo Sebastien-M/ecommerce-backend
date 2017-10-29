@@ -28,11 +28,6 @@ class Panier {
      */
     private $articles;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="panier")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
-     */
-    private $user;
 
     /**
      * Get id
@@ -66,27 +61,4 @@ class Panier {
     }
 
 
-    /**
-     * Set user
-     *
-     * @param \AppBundle\Entity\Utilisateur $user
-     *
-     * @return Panier
-     */
-    public function setUser(\AppBundle\Entity\Utilisateur $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \AppBundle\Entity\Utilisateur
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

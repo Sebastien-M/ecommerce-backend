@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\UtilisateurType;
+use AppBundle\Entity\Panier;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -81,8 +82,15 @@ class UtilisateurController extends Controller {
                 return new JsonResponse('User already exists', 403);
             } else {
                 $em = $this->get('doctrine.orm.entity_manager');
+                $panier = new Panier();
+                $em->persist($panier);
+                
+                $em->flush();
+                $panierId = $panier->getId();
+                $utilisateur->setPanier($panier);
                 $em->persist($utilisateur);
                 $em->flush();
+                dump($utilisateur);
                 return new Response("ok", 201, array('Access-Control-Allow-Origin' => '*'));
             }
         } else {

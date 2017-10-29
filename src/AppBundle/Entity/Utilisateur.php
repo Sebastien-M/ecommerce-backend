@@ -27,15 +27,6 @@ class Utilisateur extends BaseUser {
     protected $id;
 
     /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-    /**
      * @Assert\NotBlank()
      * 
      */
@@ -52,9 +43,20 @@ class Utilisateur extends BaseUser {
     protected $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Panier", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Panier")
+     * @ORM\JoinColumn(name="panier", referencedColumnName="id")
      */
     private $panier;
+    
+    
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
 
 
     /**
@@ -109,4 +111,18 @@ class Utilisateur extends BaseUser {
     }
 
 
+
+    /**
+     * Set panier
+     *
+     * @param \AppBundle\Entity\Panier $panier
+     *
+     * @return Utilisateur
+     */
+    public function setPanier(\AppBundle\Entity\Panier $panier = null)
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
 }

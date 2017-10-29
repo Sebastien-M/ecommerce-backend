@@ -81,7 +81,7 @@ class Produit
      * @ORM\Column(name="prix", type="float")
      */
     private $prix;
-
+    
 
     /**
      * Get id

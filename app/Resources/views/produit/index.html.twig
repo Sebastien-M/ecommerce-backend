@@ -15,6 +15,7 @@
                 <th>Disponible</th>
                 <th>Prix</th>
                 <th>Actions</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                 <td>{{ produit.description }}</td>
                 <td>{% if produit.disponible %}Yes{% else %}No{% endif %}</td>
                 <td>{{ produit.prix }}</td>
+                <td>{{ produit.image }}</td>
                 <td>
                     <ul>
                         <li>

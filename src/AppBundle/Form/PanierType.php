@@ -13,7 +13,7 @@ class PanierType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('articles')->add('user');
+        $builder->add('articles');
     }
     
     /**
