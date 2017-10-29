@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/seb/Documents/dev/ecommerce-sf/src/AppBundle/Entity/Utilisateur.php</file>
+            <file>file:/home/seb/Documents/dev/ecommerce-sf/app/Resources/views/utilisateur/index.html.twig</file>
+            <file>file:/home/seb/Documents/dev/ecommerce-sf/src/AppBundle/Controller/DefaultController.php</file>
             <file>file:/home/seb/Documents/dev/ecommerce-sf/src/AppBundle/Controller/UtilisateurController.php</file>
-            <file>file:/home/seb/Documents/dev/ecommerce-sf/src/AppBundle/Controller/PanierController.php</file>
-            <file>file:/home/seb/Documents/dev/ecommerce-sf/src/AppBundle/Controller/CommandeController.php</file>
             <file>file:/home/seb/Documents/dev/ecommerce-sf/src/AppBundle/Controller/ProduitController.php</file>
             <file>file:/home/seb/Documents/dev/ecommerce-sf/src/AppBundle/Entity/Produit.php</file>
         </group>

@@ -56,4 +56,38 @@ class Utilisateur extends BaseUser {
      */
     private $panier;
 
+
+    /**
+     * Add panier
+     *
+     * @param \AppBundle\Entity\Panier $panier
+     *
+     * @return Utilisateur
+     */
+    public function addPanier(\AppBundle\Entity\Panier $panier)
+    {
+        $this->panier[] = $panier;
+
+        return $this;
+    }
+
+    /**
+     * Remove panier
+     *
+     * @param \AppBundle\Entity\Panier $panier
+     */
+    public function removePanier(\AppBundle\Entity\Panier $panier)
+    {
+        $this->panier->removeElement($panier);
+    }
+
+    /**
+     * Get panier
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
 }

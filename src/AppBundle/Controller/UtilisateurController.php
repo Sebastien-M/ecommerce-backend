@@ -117,24 +117,27 @@ class UtilisateurController extends Controller {
      * @Method("POST")
      */
     public function connectAction(Request $request) {
-        $username = $request->get("username");
-        $password = $request->get("password");
+
+        $user_manager = $this->get('fos_user.user_manager');
+        $factory = $this->get('security.encoder_factory');
+
+//        $user = $user_manager->loadUserByUsername($request->get("username"));
         $user = $this->getDoctrine()
                 ->getRepository('AppBundle:Utilisateur')
-                ->findOneBy(array('username' => $username));
-        
-        $encoder_service = $this->get('security.encoder_factory');
-        $encoder = $encoder_service->getEncoder($user);
-        $encoded_pass = $encoder->encodePassword($password, $user->getSalt());
+                ->findOneBy(array('username' => $request->get("username")));
 
-        //then compare    $user->getPassword() and $encoded_pass
+        $encoder = $factory->getEncoder($user);
 
+        $bool = ($encoder->isPasswordValid($user->getPassword(), $request->get("password"), $user->getSalt())) ? "true" : "false";
 
-        if ($encoded_pass == $user->getPassword()) {
-
-            return new JsonResponse("Connected", 200, array('Access-Control-Allow-Origin' => '*'));
+        if($bool == "true"){
+            return new JsonResponse("ok", 200, array('Access-Control-Allow-Origin' => '*'));
         }
-        return new JsonResponse("Incorrect username or password entered :". $encoded_pass. "!=". $user->getPassword(), 400, array('Access-Control-Allow-Origin' => '*'));
+        else{
+            return new JsonResponse("bad username or password", 400, array('Access-Control-Allow-Origin' => '*'));
+        }
+        
+
     }
 
     /**

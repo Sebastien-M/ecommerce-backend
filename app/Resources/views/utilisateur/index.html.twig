@@ -7,13 +7,16 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Actions</th>
+                <th>Username</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
         {% for utilisateur in utilisateurs %}
             <tr>
                 <td><a href="{{ path('utilisateur_show', { 'id': utilisateur.id }) }}">{{ utilisateur.id }}</a></td>
+                <td>{{utilisateur.username}}</td>
+                <td>{{utilisateur.email}}</td>
                 <td>
                     <ul>
                         <li>

@@ -55,7 +55,6 @@ class ProduitController extends Controller {
             'Content-Type' => 'application/json'));
     }
     
-    
     /**
      * Lists all produit entities to api by category.
      *

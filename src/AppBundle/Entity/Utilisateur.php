@@ -90,4 +90,23 @@ class Utilisateur extends BaseUser {
     {
         return $this->panier;
     }
+    
+    /**
+     * Get username
+     *
+     * @return int
+     */
+    public function getUsername() {
+        return $this->username;
+    }
+    
+    function getEmail() {
+        return $this->email;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+
 }
